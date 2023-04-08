@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:badges/badges.dart' as badges;
 
+import '../model/foods.dart';
 import '../orderfoods/foodsordered.dart';
 class AppBarSourse extends StatelessWidget {
- late int count;
-   AppBarSourse({Key? key,required this.count}) : super(key: key);
+ final int count;
+ final List<Foods> foods;
+   AppBarSourse({Key? key,required this.count,required this.foods}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class AppBarSourse extends StatelessWidget {
         ),
            GestureDetector(
              onTap:  () {
-               Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderedFoods()));
+               Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderedFoods(foods: foods,)));
              },
              child: Container(
                child: badges.Badge(

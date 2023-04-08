@@ -4,8 +4,9 @@ import 'package:max_way/model/pop.dart';
 import 'package:max_way/model/model_food.dart';
 import 'package:max_way/model/stackdown.dart';
 import '../appbar/appbar.dart';
+import '../model/foods.dart';
 import '../model/infor.dart';
-
+typedef void foodCallback(List<Foods> foods);
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -15,6 +16,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int count =0;
+  List<Foods> _foods=[];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,6 +28,7 @@ class _MainScreenState extends State<MainScreen> {
           backgroundColor: Colors.white,
           title:  AppBarSourse(
             count: count,
+            foods: _foods,
           ),
         ),
         body: SingleChildScrollView(
@@ -46,8 +50,8 @@ class _MainScreenState extends State<MainScreen> {
               ),
               const Popular(),
               const SecondAppBarItem(),
-               FoodsCategory(function: (){
-                 calculate();
+               FoodsCategory(onFoodChanged: (List<Foods> foods){
+                 calculate(foods);
                },),
               const StackDown(),
               const Padding(
@@ -64,9 +68,10 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-  void calculate(){
+  void calculate(List<Foods> foods){
     setState(() {
       count++;
+      _foods=foods;
     });
   }
 }

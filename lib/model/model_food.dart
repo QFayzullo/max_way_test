@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../screens/main_screen.dart';
 import 'foods.dart';
 import 'more.dart';
 
 // ignore: must_be_immutable
 class FoodsCategory extends StatefulWidget {
-late  Function function;
-   FoodsCategory({Key? key, required this.function}) : super(key: key);
+final foodCallback onFoodChanged;
+   FoodsCategory({Key? key, required this.onFoodChanged}) : super(key: key);
 
 
   @override
@@ -20,19 +21,19 @@ class _FoodsCategoryState extends State<FoodsCategory> {
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/pitsa.png',
-        cost: "45,000 UZS"),
+        cost: "45000"),
     Foods(
         title: "Mexica",
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/mexica.png',
-        cost: "64,000 UZS"),
+        cost: "64000"),
     Foods(
         title: "Hot achchiko",
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/pitsa.png',
-        cost: "53,000 UZS"),
+        cost: "53000"),
   ];
   static List<Foods> burger = [
     Foods(
@@ -40,19 +41,19 @@ class _FoodsCategoryState extends State<FoodsCategory> {
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/burger.png',
-        cost: "45,000 UZS"),
+        cost: "45000"),
     Foods(
         title: "Chiliburger",
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/burger.png',
-        cost: "64,000 UZS"),
+        cost: "64000"),
     Foods(
         title: "Hamburger",
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/burger.png',
-        cost: "53,000 UZS"),
+        cost: "53000"),
   ];
   static List<Foods> kombo = [
     Foods(
@@ -60,19 +61,19 @@ class _FoodsCategoryState extends State<FoodsCategory> {
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/kombo.png',
-        cost: "23,000 UZS"),
+        cost: "23000"),
     Foods(
         title: "Kombo-2",
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/combo2.png',
-        cost: "25,000 UZS"),
+        cost: "25000"),
     Foods(
         title: "Kombo-3",
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/kombo.png',
-        cost: "30,000 UZS"),
+        cost: "30000"),
   ];
   static List<Foods> waters = [
     Foods(
@@ -80,21 +81,21 @@ class _FoodsCategoryState extends State<FoodsCategory> {
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/water.png',
-        cost: "6,000 UZS"),
+        cost: "6000"),
     Foods(
         title: "Coca cola 1,5L",
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/cola.png',
-        cost: "9,000 UZS"),
+        cost: "9000"),
     Foods(
         title: "Fanta",
         content:
             "Горячая закуска с митболамииз говядины, томатами,моцареллой и соусом чипотле",
         imgName: 'assets/images/fanta.png',
-        cost: "6,000 UZS"),
+        cost: "6000"),
   ];
-
+  List<Foods> foodsList=[];
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -245,11 +246,14 @@ class _FoodsCategoryState extends State<FoodsCategory> {
                                 fontFamily: "Inter-Regular.ttf"),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(30.0),
                             child: FloatingActionButton(
                               backgroundColor: Colors.amber,
                               onPressed: () {
-                                widget.function.call();
+                                setState(() {
+                                  foodsList.add(pitsa);
+                                });
+                                widget.onFoodChanged(foodsList);
                               },
                               child: const Icon(Icons.add),
                               ),
